@@ -4,7 +4,7 @@ This project demonstrates the complete end-to-end Machine Learning cycle, from d
 
 ## Links
 
-- **GitHub Repository**: [Insert GitHub Link Here]
+- **GitHub Repository**: [Mahamatbt/summative-ml-pipeline](https://github.com/Mahamatbt/summative-ml-pipeline)
 - **Video Demo (YouTube)**: [Insert YouTube Link Here]
 - **Live App URL (Render)**: [Insert Render URL Here]
 
