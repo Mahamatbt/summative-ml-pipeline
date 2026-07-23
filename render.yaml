@@ -1,0 +1,23 @@
+services:
+  # The API Service
+  - type: web
+    name: garbage-classification-api
+    env: docker
+    dockerfilePath: api/Dockerfile
+    plan: free
+    region: ohio
+    healthCheckPath: /uptime
+
+  # The Streamlit UI Service
+  - type: web
+    name: garbage-classification-ui
+    env: docker
+    dockerfilePath: ui/Dockerfile
+    plan: free
+    region: ohio
+    envVars:
+      - key: API_URL
+        fromService:
+          type: web
+          name: garbage-classification-api
+          envVarKey: RENDER_EXTERNAL_URL
