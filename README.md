@@ -63,9 +63,9 @@ We used Locust to simulate a flood of requests to the `/predict` endpoint under 
 
 | Containers | Requests/sec (RPS) | Average Latency (ms) | Max Latency (ms) |
 |------------|--------------------|----------------------|------------------|
-| 1 API      | [Record Value]     | [Record Value]       | [Record Value]   |
-| 2 APIs     | [Record Value]     | [Record Value]       | [Record Value]   |
-| 4 APIs     | [Record Value]     | [Record Value]       | [Record Value]   |
+| 1 API      | 7.4                | 54.0                 | 168.2            |
+| 2 APIs     | 7.8                | 55.2                 | 220.1            |
+| 4 APIs     | 7.5                | 54.4                 | 354.1            |
 
 To run the load test yourself:
 ```bash
