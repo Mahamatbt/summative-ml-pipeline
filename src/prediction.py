@@ -20,8 +20,13 @@ _MODEL_CACHE: dict = {"model": None, "path": None}
 def get_model(model_path: Path):
     """Load the model once and cache it; reload only if the path on disk changed
     (e.g. after a retrain swapped in a new file)."""
+    class CustomDense(tf.keras.layers.Dense):
+        def __init__(self, *args, **kwargs):
+            kwargs.pop('quantization_config', None)
+            super().__init__(*args, **kwargs)
+            
     if _MODEL_CACHE["model"] is None or _MODEL_CACHE["path"] != str(model_path):
-        _MODEL_CACHE["model"] = tf.keras.models.load_model(model_path)
+        _MODEL_CACHE["model"] = tf.keras.models.load_model(model_path, custom_objects={'Dense': CustomDense})
         _MODEL_CACHE["path"] = str(model_path)
     return _MODEL_CACHE["model"]
 

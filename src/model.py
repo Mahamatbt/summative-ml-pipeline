@@ -116,9 +116,12 @@ def retrain_model(existing_model_path: Path, train_dir: Path, test_dir: Path,
     the API — call it after new labeled data has been merged into train_dir.
 
     Returns (metrics: dict, was_deployed: bool).
-    """
-    current_model = tf.keras.models.load_model(existing_model_path)
-
+    class CustomDense(tf.keras.layers.Dense):
+        def __init__(self, *args, **kwargs):
+            kwargs.pop('quantization_config', None)
+            super().__init__(*args, **kwargs)
+            
+    current_model = tf.keras.models.load_model(existing_model_path, custom_objects={'Dense': CustomDense})
     train_gen, val_gen = get_train_val_generators(train_dir)
     test_gen = get_test_generator(test_dir)
 
