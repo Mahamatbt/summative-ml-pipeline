@@ -143,7 +143,8 @@ def _run_retrain_task():
             prediction.invalidate_model_cache()
             
     except Exception as e:
-        STATUS["last_retrain_metrics"] = {"error": str(e)}
+        import traceback
+        STATUS["last_retrain_metrics"] = {"error": str(e), "traceback": traceback.format_exc()}
     finally:
         STATUS["is_retraining"] = False
 
