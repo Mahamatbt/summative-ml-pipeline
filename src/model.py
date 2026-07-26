@@ -133,7 +133,7 @@ def retrain_model(existing_model_path: Path, train_dir: Path, test_dir: Path,
             kwargs.pop('quantization_config', None)
             super().__init__(*args, **kwargs)
             
-    current_model = tf.keras.models.load_model(existing_model_path, custom_objects={'Dense': CustomDense})
+    current_model = tf.keras.models.load_model(existing_model_path, custom_objects={'Dense': CustomDense, 'CustomDense': CustomDense})
     
     # Recompile loaded model to clear legacy states and force eager execution to avoid numpy() tensor errors
     from tensorflow.keras import optimizers

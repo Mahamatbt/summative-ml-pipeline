@@ -26,7 +26,7 @@ def get_model(model_path: Path):
             super().__init__(*args, **kwargs)
             
     if _MODEL_CACHE["model"] is None or _MODEL_CACHE["path"] != str(model_path):
-        _MODEL_CACHE["model"] = tf.keras.models.load_model(model_path, custom_objects={'Dense': CustomDense})
+        _MODEL_CACHE["model"] = tf.keras.models.load_model(model_path, custom_objects={'Dense': CustomDense, 'CustomDense': CustomDense})
         _MODEL_CACHE["path"] = str(model_path)
     return _MODEL_CACHE["model"]
 
