@@ -43,7 +43,9 @@ def build_train_test_dirs(raw_dir: Path, train_dir: Path, test_dir: Path,
     for cls in class_names:
         files = list((raw_dir / cls).glob("*"))
         rng.shuffle(files)
-        n_test = max(1, int(len(files) * test_split))
+        n_test = int(len(files) * test_split)
+        if len(files) == 1:
+            n_test = 0  # if only 1 image, put it in train, not test
         test_files, train_files = files[:n_test], files[n_test:]
 
         (train_dir / cls).mkdir(parents=True, exist_ok=True)
