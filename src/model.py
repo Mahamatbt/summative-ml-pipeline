@@ -45,7 +45,7 @@ def build_model(num_classes: int = len(CLASS_NAMES), img_size=IMG_SIZE):
 def _class_weights_from_generator(gen):
     y = gen.classes
     weights = compute_class_weight(class_weight="balanced", classes=np.unique(y), y=y)
-    return dict(enumerate(weights))
+    return {i: float(w) for i, w in enumerate(weights)}
 
 
 def train_model(model, train_gen, val_gen, epochs: int = 15, class_weight: dict = None):
