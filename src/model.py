@@ -99,9 +99,9 @@ def evaluate_model(model, test_gen, class_names=CLASS_NAMES) -> dict:
         "recall_weighted": float(recall),
         "f1_weighted": float(f1),
         "roc_auc": float(auc) if auc is not None else None,
-        "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
+        "confusion_matrix": confusion_matrix(y_true, y_pred, labels=np.arange(len(class_names))).tolist(),
         "classification_report": classification_report(
-            y_true, y_pred, target_names=class_names, output_dict=True
+            y_true, y_pred, labels=np.arange(len(class_names)), target_names=class_names, output_dict=True, zero_division=0
         ),
     }
 
