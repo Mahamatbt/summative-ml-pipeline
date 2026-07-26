@@ -78,6 +78,16 @@ def fine_tune_model(model, base_model, train_gen, val_gen, epochs: int = 8,
 def evaluate_model(model, test_gen, class_names=CLASS_NAMES) -> dict:
     """Run full evaluation and return every metric the assignment requires."""
     test_gen.reset()
+    if test_gen.samples == 0:
+        return {
+            "test_loss": 0.0,
+            "test_accuracy": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0,
+            "auc": 0.0,
+            "confusion_matrix": []
+        }
     y_true = test_gen.classes
     y_pred_probs = model.predict(test_gen)
     y_pred = np.argmax(y_pred_probs, axis=1)
