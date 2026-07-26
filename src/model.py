@@ -80,13 +80,14 @@ def evaluate_model(model, test_gen, class_names=CLASS_NAMES) -> dict:
     test_gen.reset()
     if test_gen.samples == 0:
         return {
-            "test_loss": 0.0,
-            "test_accuracy": 0.0,
-            "precision": 0.0,
-            "recall": 0.0,
-            "f1_score": 0.0,
-            "auc": 0.0,
-            "confusion_matrix": []
+            "loss": 0.0,
+            "accuracy": 0.0,
+            "precision_weighted": 0.0,
+            "recall_weighted": 0.0,
+            "f1_weighted": 0.0,
+            "roc_auc": 0.0,
+            "confusion_matrix": [],
+            "classification_report": {}
         }
     y_true = test_gen.classes
     y_pred_probs = model.predict(test_gen)
