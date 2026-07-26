@@ -98,16 +98,17 @@ async def upload_bulk(file: UploadFile = File(...)):
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                 zip_ref.extractall(extract_dir)
             
-            # Find the root folder containing the class folders
-            # Sometimes ZIPs have a top-level folder, sometimes they don't
+            # Find class folders
             class_dirs = [d for d in extract_dir.iterdir() if d.is_dir() and d.name in preprocessing.CLASS_NAMES]
             if not class_dirs:
-                # check one level deeper
-                subdirs = [d for d in extract_dir.iterdir() if d.is_dir()]
-                if subdirs:
-                    class_dirs = [d for d in subdirs[0].iterdir() if d.is_dir() and d.name in preprocessing.CLASS_NAMES]
-                    if class_dirs:
-                        extract_dir = subdirs[0]
+                # check one level deeper, ignoring __MACOSX
+                subdirs = [d for d in extract_dir.iterdir() if d.is_dir() and d.name != "__MACOSX"]
+                for sd in subdirs:
+                    potential_class_dirs = [d for d in sd.iterdir() if d.is_dir() and d.name in preprocessing.CLASS_NAMES]
+                    if potential_class_dirs:
+                        class_dirs = potential_class_dirs
+                        extract_dir = sd
+                        break
             
             if not class_dirs:
                 raise HTTPException(status_code=400, detail="ZIP file does not contain valid class folders")
