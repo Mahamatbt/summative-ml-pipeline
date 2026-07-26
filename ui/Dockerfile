@@ -6,6 +6,7 @@ COPY ui/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ui/ /app/ui/
+COPY data/visualizations/ /app/data/visualizations/
 # Create data/visualizations dir just in case
 RUN mkdir -p /app/data/visualizations
 

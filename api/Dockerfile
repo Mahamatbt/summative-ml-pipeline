@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project context to include src modules and models
 COPY src/ /app/src/
 COPY api/ /app/api/
+COPY models/ /app/models/
 
 # The models and data directory will be mounted or populated at runtime, 
 # but let's ensure the folders exist
