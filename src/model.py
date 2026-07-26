@@ -134,6 +134,17 @@ def retrain_model(existing_model_path: Path, train_dir: Path, test_dir: Path,
             super().__init__(*args, **kwargs)
             
     current_model = tf.keras.models.load_model(existing_model_path, custom_objects={'Dense': CustomDense})
+    
+    # Recompile loaded model to clear legacy states and force eager execution to avoid numpy() tensor errors
+    from tensorflow.keras import optimizers
+    current_model.compile(
+        optimizer=optimizers.Adam(learning_rate=1e-4),
+        loss="categorical_crossentropy",
+        metrics=["accuracy"],
+        run_eagerly=True
+    )
+
+    # Train (fine-tune) current model with new data
     train_gen, val_gen = get_train_val_generators(train_dir)
     test_gen = get_test_generator(test_dir)
 
