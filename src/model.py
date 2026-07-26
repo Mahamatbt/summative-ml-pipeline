@@ -57,7 +57,7 @@ def train_model(model, train_gen, val_gen, epochs: int = 15, class_weight: dict 
         class_weight = _class_weights_from_generator(train_gen)
     return model.fit(
         train_gen, validation_data=val_gen, epochs=epochs,
-        class_weight=class_weight, callbacks=callbacks,
+        callbacks=callbacks,
     )
 
 
