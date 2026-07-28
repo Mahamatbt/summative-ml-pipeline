@@ -5,7 +5,7 @@ This project demonstrates the complete end-to-end Machine Learning cycle, from d
 ## Links
 
 - **GitHub Repository**: [Mahamatbt/summative-ml-pipeline](https://github.com/Mahamatbt/summative-ml-pipeline)
-- **Video Demo (YouTube)**: [Insert YouTube Link Here]
+- **Video Demo (YouTube)**: [https://youtu.be/n3ekhQsK0S8](https://youtu.be/n3ekhQsK0S8)
 - **Live App URL (Render)**: https://garbage-classification-api.onrender.com/
 
 ## Project Description
