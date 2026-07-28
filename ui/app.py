@@ -79,7 +79,7 @@ with tabs[2]:
         images = [f for f in os.listdir(vis_dir) if f.endswith(".png") or f.endswith(".jpg")]
         for i, img_name in enumerate(images):
             with cols[i % 2]:
-                st.image(os.path.join(vis_dir, img_name), caption=img_name, use_column_width=True)
+                st.image(os.path.join(vis_dir, img_name), caption=img_name, use_container_width=True)
         if not images:
             st.info("No visualizations found in the directory.")
     else:
