@@ -28,12 +28,8 @@ This pipeline fulfills the following requirements:
 
 ## Setup Instructions
 
-### 1. Initial Setup and Model Generation
-Before running the API and UI, you need to generate the initial model and visualizations:
-1. Open `notebook/garbage_classification.ipynb` in Jupyter or VS Code.
-2. Run all cells. This will download the dataset via Kagglehub, train the model, save visualizations to `data/visualizations/`, and save the model to `models/garbage_classifier_v1.h5`.
-
-### 2. Running Locally with Docker Compose
+### 1. Running Locally with Docker Compose
+The repository already includes a pre-trained model (`models/garbage_classifier_v1.h5`), so you do NOT need to run the notebook to boot the API. 
 The project uses Docker Compose to orchestrate the UI, Nginx load balancer, and scalable API instances.
 
 ```bash
@@ -47,6 +43,11 @@ docker-compose up --scale api=2 -d
 docker-compose up --scale api=4 -d
 ```
 The Streamlit UI will be available at `http://localhost:8501`.
+
+### 2. (Optional) Initial Setup and Model Generation
+If you want to see how the baseline model was trained from scratch:
+1. Open `notebook/garbage_classification.ipynb` in Jupyter or VS Code.
+2. Run all cells. This will download the dataset via Kagglehub, train the model, save visualizations to `data/visualizations/`, and save the model to `models/garbage_classifier_v1.h5`.
 
 ### 3. Deploying to Render
 1. Push this repository to GitHub.
