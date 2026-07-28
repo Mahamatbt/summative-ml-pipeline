@@ -49,9 +49,14 @@ def _class_weights_from_generator(gen):
 
 
 def train_model(model, train_gen, val_gen, epochs: int = 15, class_weight: dict = None):
+    if val_gen is not None and len(val_gen) == 0:
+        val_gen = None
+
+    monitor_metric = "val_loss" if val_gen is not None else "loss"
+    
     callbacks = [
-        tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=4, restore_best_weights=True),
-        tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.5, patience=2),
+        tf.keras.callbacks.EarlyStopping(monitor=monitor_metric, patience=4, restore_best_weights=True),
+        tf.keras.callbacks.ReduceLROnPlateau(monitor=monitor_metric, factor=0.5, patience=2),
     ]
     if class_weight is None:
         class_weight = _class_weights_from_generator(train_gen)
